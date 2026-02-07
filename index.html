@@ -1,0 +1,1135 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, maximum-scale=1.0, user-scalable=no">
+    <meta name="theme-color" content="#020c1b">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <title>International Longevity Summit Madrid 2026</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Montserrat:wght@300;500;700&family=Playfair+Display:wght@700;900&family=Cormorant+Garamond:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        navy: { 900: '#020c1b', 800: '#0a192f', 700: '#112240' },
+                        teal: { 400: '#64ffda', },
+                        gold: { 500: '#c5a059', 600: '#b08d48' },
+                        bronze: { 500: '#cd7f32' },
+                        silver: { 500: '#c0c0c0' },
+                        platinum: { 500: '#e5e4e2' }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        header: ['Montserrat', 'sans-serif'],
+                    },
+                    animation: {
+                        'fade-in': 'fadeIn 0.5s ease-out forwards',
+                        'pop-up': 'popUp 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards',
+                        'pulse-slow': 'pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                    },
+                    keyframes: {
+                        fadeIn: {
+                            '0%': { opacity: '0', transform: 'translateY(20px)' },
+                            '100%': { opacity: '1', transform: 'translateY(0)' },
+                        },
+                        popUp: {
+                            '0%': { opacity: '0', transform: 'scale(0.8)' },
+                            '100%': { opacity: '1', transform: 'scale(1)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* PREVENIR LAYOUT SHIFT - TÉCNICA CLAVE */
+        html {
+            overflow-y: scroll;
+            scrollbar-gutter: stable;
+        }
+
+        /* INDICADOR DE SCROLL */
+        .scroll-indicator {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #c5a059, #64ffda);
+            width: 0%;
+            z-index: 1001;
+            transition: width 0.1s ease-out;
+            box-shadow: 0 0 20px rgba(197, 160, 89, 0.5);
+        }
+
+        * {
+            -webkit-tap-highlight-color: transparent;
+            box-sizing: border-box;
+        }
+
+        body { 
+            font-family: 'Inter', sans-serif; 
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            position: relative;
+            width: 100%;
+        }
+        
+        h1 { font-family: 'Playfair Display', serif; font-weight: 900; letter-spacing: 0.05em; }
+        h2, h3, h4 { font-family: 'Montserrat', sans-serif; font-weight: 700; letter-spacing: 0.02em; }
+        
+        .text-gradient {
+            background: linear-gradient(90deg, #c5a059 0%, #ffffff 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        /* PORTADA - OPTIMIZADA */
+        .hero-bg {
+            background-image: url('images/portadas.jpg'); 
+            background-size: cover;
+            background-position: center top;
+            background-repeat: no-repeat;
+            background-attachment: scroll;
+            will-change: background-position;
+        }
+        
+        /* CARRUSEL INFINITO */
+        @keyframes scroll { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+        @keyframes scroll-reverse { 0% { transform: translateX(-50%); } 100% { transform: translateX(0); } }
+        
+        .animate-scroll { display: flex; width: max-content; animation: scroll 40s linear infinite; will-change: transform; }
+        .animate-scroll-reverse { display: flex; width: max-content; animation: scroll-reverse 45s linear infinite; will-change: transform; }
+        .animate-scroll-fast { display: flex; width: max-content; animation: scroll 30s linear infinite; will-change: transform; }
+        .animate-scroll:hover, .animate-scroll-reverse:hover, .animate-scroll-fast:hover { animation-play-state: paused; }
+
+        .speaker-card { transition: all 0.3s ease; }
+        .speaker-img { filter: grayscale(100%); transition: all 0.5s ease; border: 4px solid transparent; }
+        .speaker-card:hover .speaker-img { filter: grayscale(0%); border-color: #64ffda; transform: scale(1.05); }
+
+        .tour-card { transition: all 0.5s ease; }
+        .tour-card:hover { transform: translateY(-10px); }
+        .tour-content { transform: translateY(0); transition: all 0.5s ease; }
+
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+        .gallery-slide { transition: transform 0.3s ease; }
+        .gallery-slide:hover { transform: scale(1.02); }
+
+        .sponsor-list li { margin-bottom: 0.5rem; font-size: 0.8rem; display: flex; align-items: start; gap: 8px; }
+        .sponsor-list li i { margin-top: 4px; color: #64ffda; }
+
+        #register-modal { backdrop-filter: blur(8px); }
+
+        /* Ajuste de Padding Responsivo */
+        section { 
+            padding: 2rem 1rem !important; 
+            width: 100%;
+            max-width: 100%;
+            overflow-x: hidden;
+        }
+        
+        @media (min-width: 640px) {
+            section { padding: 3rem 1.5rem !important; }
+        }
+        
+        @media (min-width: 768px) {
+            section { padding: 5rem 2rem !important; }
+        }
+
+        @media (min-width: 1024px) {
+            section { padding: 6rem 2rem !important; }
+        }
+
+        .section-title-premium { position: relative; padding-bottom: 1.5rem; }
+        .section-title-premium::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 3px;
+            background: linear-gradient(90deg, #c5a059, #64ffda);
+            border-radius: 2px;
+        }
+
+        button[class*="bg-gold"], a[class*="bg-gold"] { transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1) !important; }
+        button[class*="bg-gold"]:hover, a[class*="bg-gold"]:hover { transform: translateY(-2px) !important; box-shadow: 0 15px 35px rgba(197, 160, 89, 0.3) !important; }
+
+        /* OPTIMIZACIONES PARA MÓVILES */
+        @media (max-width: 640px) {
+            h1 { font-size: 1.75rem; line-height: 1.2; }
+            h2 { font-size: 1.375rem; }
+            h3 { font-size: 1rem; }
+            
+            .text-sm { font-size: 0.8125rem; }
+            .text-xs { font-size: 0.7rem; }
+            
+            /* Evitar overflow en tablas */
+            table { font-size: 0.75rem; }
+            
+            /* Botones más grandes en móviles */
+            button, a[class*="px"] { min-height: 44px; }
+            
+            /* Espaciado mejorado */
+            .gap-4 { gap: 0.75rem; }
+            .gap-6 { gap: 1rem; }
+            .gap-8 { gap: 1.25rem; }
+        }
+
+        /* Prevenir zoom en inputs */
+        input, textarea, select {
+            font-size: 16px !important;
+        }
+
+        /* Optimizar imágenes */
+        img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        /* Mejorar accesibilidad en touch */
+        a, button {
+            min-width: 44px;
+            min-height: 44px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* Prevenir doble tap zoom */
+        a, button, input, textarea, select {
+            touch-action: manipulation;
+        }
+
+        /* Optimizar para iOS */
+        @supports (padding: max(0px)) {
+            body {
+                padding-left: max(0px, env(safe-area-inset-left));
+                padding-right: max(0px, env(safe-area-inset-right));
+            }
+        }
+
+        /* Prevenir flickering en animaciones */
+        .animate-fade-in, .animate-pop-up {
+            -webkit-backface-visibility: hidden;
+            backface-visibility: hidden;
+            -webkit-perspective: 1000;
+            perspective: 1000;
+        }
+
+        /* Optimizar nav */
+        nav {
+            will-change: transform;
+        }
+
+        /* Prevenir horizontal scroll */
+        body, html {
+            max-width: 100vw;
+            overflow-x: hidden;
+        }
+
+        /* SEPARADOR SPEAKERS 2025 */
+        .separator-2025 {
+            text-align: center;
+            margin: 3rem 0;
+            padding: 2rem 0;
+            border-top: 2px solid rgba(197, 160, 89, 0.3);
+            border-bottom: 2px solid rgba(197, 160, 89, 0.3);
+        }
+
+        .separator-2025 span {
+            display: inline-block;
+            background: linear-gradient(90deg, #c5a059, #64ffda);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-size: 1.5rem;
+            font-weight: 700;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            animation: pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+        }
+    </style>
+</head>
+<body class="bg-navy-900 text-slate-300 antialiased selection:bg-teal-400 selection:text-navy-900">
+    <div class="scroll-indicator"></div>
+
+    <div id="register-modal" class="fixed inset-0 z-[100] flex items-center justify-center bg-navy-900/80 hidden opacity-0 transition-opacity duration-300 p-4 overflow-y-auto">
+        <div class="bg-navy-900 rounded-xl shadow-2xl max-w-md w-full relative overflow-hidden border border-white/20 my-4 animate-pop-up">
+            <div class="bg-gradient-to-r from-blue-500 to-orange-500 p-3 md:p-4 flex justify-between items-center">
+                <h3 class="font-bold text-navy-900 text-base md:text-lg leading-tight flex-1">International Longevity Summit - Madrid 2026</h3>
+                <button onclick="closeModal()" class="text-navy-900 hover:text-white font-bold text-2xl leading-none flex-shrink-0 ml-2" aria-label="Close modal">&times;</button>
+            </div>
+            <div class="p-6 md:p-8 bg-navy-900">
+                <form class="space-y-4">
+                    <div><label class="block text-center text-slate-300 font-bold mb-1 text-sm">First Name:</label><input type="text" class="w-full bg-rose-100 text-navy-900 rounded-lg py-2 px-4 focus:outline-none focus:ring-2 focus:ring-orange-500 text-base"></div>
+                    <div><label class="block text-center text-slate-300 font-bold mb-1 text-sm">Last Name:</label><input type="text" class="w-full bg-rose-100 text-navy-900 rounded-lg py-2 px-4 focus:outline-none focus:ring-2 focus:ring-orange-500 text-base"></div>
+                    <div><label class="block text-center text-slate-300 font-bold mb-1 text-sm">City:</label><input type="text" class="w-full bg-rose-100 text-navy-900 rounded-lg py-2 px-4 focus:outline-none focus:ring-2 focus:ring-orange-500 text-base"></div>
+                    <div><label class="block text-center text-slate-300 font-bold mb-1 text-sm">Email:</label><input type="email" class="w-full bg-rose-100 text-navy-900 rounded-lg py-2 px-4 focus:outline-none focus:ring-2 focus:ring-orange-500 text-base"></div>
+                    <div class="text-center pt-4"><button type="button" onclick="closeModal()" class="bg-orange-500 hover:bg-orange-600 text-white font-bold py-3 px-8 rounded-lg text-base shadow-lg transition transform hover:scale-105 w-full">Submit</button></div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <nav class="fixed w-full z-50 bg-navy-900/90 backdrop-blur-md border-b border-white/10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 py-3 md:py-4 flex justify-between items-center">
+            <div class="text-lg sm:text-xl md:text-2xl font-header font-bold text-white tracking-widest truncate flex-shrink-0">
+                LongevitySummit<span class="text-gold-500">.Madrid</span>
+            </div>
+            
+            <button onclick="toggleMobileMenu()" class="lg:hidden text-white text-2xl focus:outline-none p-2 flex-shrink-0" aria-label="Toggle menu">
+                <i class="fas fa-bars"></i>
+            </button>
+
+            <div class="hidden lg:flex space-x-4 xl:space-x-5 text-[10px] xl:text-xs uppercase tracking-widest font-medium items-center">
+                <a href="#about" class="hover:text-gold-500 transition">About</a>
+                <a href="#speakers" class="hover:text-gold-500 transition">Speakers</a>
+                <a href="#agenda" class="hover:text-gold-500 transition">Agenda</a>
+                <a href="#tours" class="hover:text-gold-500 transition text-gold-500">Tours</a>
+                <a href="#tickets" class="hover:text-gold-500 transition">Tickets</a>
+                <a href="#committee" class="hover:text-white transition">Committee</a>
+                <a href="#press" class="hover:text-white transition">Press</a>
+                <a href="#tickets" class="text-white border border-white px-4 py-2 hover:bg-white hover:text-navy-900 transition font-bold rounded">Register</a>
+            </div>
+        </div>
+        
+        <div id="mobile-menu" class="hidden lg:hidden bg-navy-900 border-t border-white/10 absolute w-full max-h-[calc(100vh-60px)] overflow-y-auto">
+            <div class="flex flex-col space-y-2 px-4 py-4 text-sm uppercase tracking-widest font-medium text-center">
+                <a href="#about" onclick="toggleMobileMenu()" class="hover:text-gold-500 transition py-3 block">About</a>
+                <a href="#speakers" onclick="toggleMobileMenu()" class="hover:text-gold-500 transition py-3 block">Speakers</a>
+                <a href="#agenda" onclick="toggleMobileMenu()" class="hover:text-gold-500 transition py-3 block">Agenda</a>
+                <a href="#tours" onclick="toggleMobileMenu()" class="hover:text-gold-500 transition text-gold-500 py-3 block">Tours</a>
+                <a href="#tickets" onclick="toggleMobileMenu()" class="hover:text-gold-500 transition py-3 block">Tickets</a>
+                <a href="#committee" onclick="toggleMobileMenu()" class="hover:text-white transition py-3 block">Committee</a>
+                <a href="#press" onclick="toggleMobileMenu()" class="hover:text-white transition py-3 block">Press</a>
+                <a href="#tickets" onclick="toggleMobileMenu()" class="bg-gold-500 text-navy-900 px-4 py-3 font-bold mt-2 rounded block">Register Now</a>
+            </div>
+        </div>
+    </nav>
+
+    <header class="hero-bg min-h-screen flex items-center justify-center pt-20 md:pt-0 relative overflow-hidden">
+        <div class="absolute inset-0 bg-navy-900/60"></div>
+        <div class="relative z-10 max-w-5xl w-full px-4 sm:px-6 md:px-8 animate-fade-in">
+            <p class="text-teal-400 uppercase tracking-[0.15em] md:tracking-[0.3em] mb-3 md:mb-4 text-xs md:text-sm font-semibold shadow-black drop-shadow-md">The Future of Human Health</p>
+            <h1 class="text-3xl sm:text-4xl md:text-6xl lg:text-7xl font-bold text-white mb-0 md:mb-0 leading-tight drop-shadow-lg">
+                International <br>
+                <span class="text-gradient drop-shadow-md">Longevity Summit</span> <br>
+                Madrid 2026
+            </h1>
+            <p class="text-lg md:text-2xl text-gold-500 font-semibold mb-1 md:mb-2">September 28, 29, 30 & October 1, 2026</p>
+            <a href="#tickets" class="mt-6 md:mt-12 inline-block bg-gold-500 text-navy-900 px-6 md:px-8 py-3 md:py-4 font-bold tracking-wider hover:bg-white transition uppercase shadow-lg text-sm md:text-base rounded">Reserve Seat</a>
+        </div>
+    </header>
+
+    <section id="about" class="bg-navy-900 border-b border-white/5">
+        <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 lg:gap-16 items-center">
+            <div>
+                <h2 class="text-2xl sm:text-3xl md:text-3xl font-header font-bold text-white mb-4 md:mb-6">Redefining the <span class="text-gold-500">Biological Horizon</span></h2>
+                <p class="text-slate-100 mb-4 md:mb-6 leading-relaxed text-sm md:text-base text-justify indent-8">
+                    Madrid will become the meeting point for this futuristic celebration, where world-renowned experts will present their ideas and research on the science of Longevity.
+                </p>
+                <p class="text-slate-100 mb-4 md:mb-6 leading-relaxed text-sm md:text-base text-justify indent-8">
+                    The goal is to combine international meetings with local audiences and help promote research and development in the longevity industry in Spain and worldwide.
+                </p>
+                <p class="text-slate-100 mb-4 md:mb-6 leading-relaxed text-sm md:text-base text-justify indent-8">
+                    In partnership with pioneering sponsors, we will make our best effort in scientific outreach to raise societal awareness of the new economy and the opportunities that will arise in the next two decades.
+                </p>
+                <ul class="space-y-3 md:space-y-4 text-slate-300 text-sm md:text-base">
+                    <li class="flex items-center gap-3"><i class="fas fa-dna text-teal-400 flex-shrink-0"></i> Advanced Genomics</li>
+                    <li class="flex items-center gap-3"><i class="fas fa-brain text-teal-400 flex-shrink-0"></i> Cognitive Preservation</li>
+                </ul>
+            </div>
+            <div class="relative mt-8 md:mt-0">
+                <div class="absolute -inset-4 bg-teal-400/20 rounded-lg blur-lg"></div>
+                <img src="images/reunion1.jpg" class="relative rounded-lg shadow-2xl border border-white/10 grayscale hover:grayscale-0 transition duration-700 w-full h-auto" alt="Summit reunion" loading="lazy">
+            </div>
+<div>
+                <h2 class="text-2xl sm:text-3xl md:text-3xl font-header font-bold text-white mb-4 md:mb-6">The most beautiful Classical auditorium in Spain<span class="text-gold-500"></span></h2>
+                <p class="text-slate-100 mb-4 md:mb-6 leading-relaxed text-sm md:text-base text-justify indent-8">
+                   Madrid 2026 isn't just a conference; it's a global convergence of scientific rigor and visionary thinking. We bring the longevity conversation to Southern Europe.
+                </p>
+                <p class="text-slate-100 mb-4 md:mb-6 leading-relaxed text-sm md:text-base text-justify indent-8">
+                   The International Longevity Summit will be held at the Ilustre Colegio Oficial de Médicos de Madrid. ICOMEM, the official name of the institution that brings together all legally practicing doctors in Madrid, was founded in 1893.
+                </p>
+                <p class="text-slate-100 mb-4 md:mb-6 leading-relaxed text-sm md:text-base text-justify indent-8">
+                   Its Great Amphiteater is the most beautiful Classical auditorium in Spain, the same place where the Santiago Ramón y Cajal, Spanish Nobel laureate, gave its lectures.
+                </p>
+                <p class="text-slate-100 mb-4 md:mb-6 leading-relaxed text-sm md:text-base text-justify indent-8">
+                   The headquarters of the Colegio is located on Calle de Santa Isabel, occupying the facilities of the former Hospital Clínico de San Carlos, next to the famous Queen Sophia Museum, that hosts the Gernika painting by Picasso.
+                </p>
+                           </div>
+            <div class="relative mt-8 md:mt-0">
+                <div class="absolute -inset-4 bg-teal-400/20 rounded-lg blur-lg"></div>
+                <img src="images/medicos.jpg" class="relative rounded-lg shadow-2xl border border-white/10 grayscale hover:grayscale-0 transition duration-700 w-full h-auto" alt="Summit reunion" loading="lazy">
+            </div>
+<div>
+                <h2 class="text-2xl sm:text-3xl md:text-3xl font-header font-bold text-white mb-4 md:mb-6"><span class="text-gold-500"></span></h2>
+                <p class="text-slate-100 mb-4 md:mb-6 leading-relaxed text-sm md:text-base text-justify indent-8">
+                    Madrid will become the meeting point for this futuristic celebration, where world-renowned experts will present their ideas and research on the science of Longevity.
+
+
+​Ilustre Colegio Oficial de Médicos de Madrid (ICOMEM)
+​C/ de Sta. Isabel, 51, Centro, 28012 Madrid.
+                    <br><br>
+                                    </p>
+                            </div>
+            <div class="flex justify-center items-center mt-8 md:mt-0 px-4">
+                <div class="relative w-full max-w-2xl">
+                <div class="absolute -inset-4 bg-teal-400/20 rounded-lg blur-lg"></div>
+                <a href="https://maps.app.goo.gl/GNxdjz7xXi8uETa48" target="_blank" rel="noopener noreferrer" class="block hover:opacity-90 transition duration-300 relative z-10">
+                <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d3037.968477620077!2d-3.6966793!3d40.4095491!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xd422629207147c9%3A0x1df95f97a188e5ba!2sIlustre%20Colegio%20Oficial%20de%20M%C3%A9dicos%20de%20Madrid%20(ICOMEM)!5e0!3m2!1ses!2scl!4v1768862667993!5m2!1ses!2scl" width="100%" height="300" style="border:0;" class="w-full h-64 md:h-96" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                </a>
+                </div>
+            </div>
+
+
+
+        </div>
+    </section>
+
+    <section id="gallery" class="bg-navy-800 border-b border-white/5 relative">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-8 md:mb-12">
+                <h2 class="text-2xl sm:text-3xl md:text-3xl font-header font-bold text-white">Previous <span class="text-teal-400">Summits</span></h2>
+                <p class="text-slate-400 mt-2 text-sm md:text-base"></p>
+            </div>
+            <div class="relative group">
+                <button onclick="slideGallery(-1)" class="absolute left-0 top-1/2 -translate-y-1/2 z-20 bg-navy-900/80 hover:bg-gold-500 text-gold-500 hover:text-navy-900 w-9 h-9 md:w-12 md:h-12 flex items-center justify-center rounded-full border border-gold-500 transition-all duration-300 -ml-1 md:-ml-8 shadow-lg cursor-pointer" aria-label="Previous slide">
+                    <i class="fas fa-chevron-left text-sm md:text-base"></i>
+                </button>
+                <div id="gallery-scroll-container" class="flex gap-3 md:gap-6 overflow-x-auto no-scrollbar scroll-smooth py-4 px-2">
+<div class="min-w-[280px] sm:min-w-[350px] md:min-w-[500px] h-[220px] sm:h-[280px] md:h-[350px] relative rounded-lg overflow-hidden gallery-slide border border-white/10 shrink-0">
+                        <img src="images/2025.jpg" class="w-full h-full object-cover" alt="Main Stage London 2024" loading="lazy">
+                        <div class="absolute bottom-0 left-0 w-full p-3 md:p-6 bg-gradient-to-t from-navy-900 to-transparent">
+                            <span class="text-white font-bold block text-base md:text-xl"></span>
+                            <span class="text-gold-500 text-xs md:text-sm uppercase">2025</span>
+                        </div>
+                    </div>
+
+                    <div class="min-w-[280px] sm:min-w-[350px] md:min-w-[500px] h-[220px] sm:h-[280px] md:h-[350px] relative rounded-lg overflow-hidden gallery-slide border border-white/10 shrink-0">
+                        <img src="https://www.transvisionmadrid.com/es/img/videos/logo%202024.jpg" class="w-full h-full object-cover" alt="Main Stage London 2024" loading="lazy">
+                        <div class="absolute bottom-0 left-0 w-full p-3 md:p-6 bg-gradient-to-t from-navy-900 to-transparent">
+                            <span class="text-white font-bold block text-base md:text-xl"></span>
+                            <span class="text-gold-500 text-xs md:text-sm uppercase">2024</span>
+                        </div>
+                    </div>
+                    
+                    
+            <div class="min-w-[280px] sm:min-w-[350px] md:min-w-[500px] h-[220px] sm:h-[280px] md:h-[350px] relative rounded-lg overflow-hidden gallery-slide border border-white/10 shrink-0">
+                        <img src="https://www.transvisionmadrid.com/es/img/videos/transvision2023up.png" class="w-full h-full object-cover" alt="Networking Hall Dublin 2023" loading="lazy">
+                        <div class="absolute bottom-0 left-0 w-full p-3 md:p-6 bg-gradient-to-t from-navy-900 to-transparent">
+                             <span class="text-white font-bold block text-base md:text-xl"></span>
+                            <span class="text-gold-500 text-xs md:text-sm uppercase">2023</span>
+                        </div>
+                    </div>
+<div class="min-w-[280px] sm:min-w-[350px] md:min-w-[500px] h-[220px] sm:h-[280px] md:h-[350px] relative rounded-lg overflow-hidden gallery-slide border border-white/10 shrink-0">
+                         <img src="https://www.transvisionmadrid.com/es/img/videos/transvision2022min---dw.png" class="w-full h-full object-cover" alt="madrid 2022" loading="lazy">
+                        <div class="absolute bottom-0 left-0 w-full p-3 md:p-6 bg-gradient-to-t from-navy-900 to-transparent">
+                             <span class="text-white font-bold block text-base md:text-xl"></span>
+                            <span class="text-gold-500 text-xs md:text-sm uppercase">2022</span>
+                        </div>
+</div>
+<div class="min-w-[280px] sm:min-w-[350px] md:min-w-[500px] h-[220px] sm:h-[280px] md:h-[350px] relative rounded-lg overflow-hidden gallery-slide border border-white/10 shrink-0">
+                         <img src="images/2021.jpg" class="w-full h-full object-cover" alt="madrid 2021" loading="lazy">
+                        <div class="absolute bottom-0 left-0 w-full p-3 md:p-6 bg-gradient-to-t from-navy-900 to-transparent">
+                             <span class="text-white font-bold block text-base md:text-xl"></span>
+                            <span class="text-gold-500 text-xs md:text-sm uppercase">2021</span>
+                        </div>
+</div>
+<div class="min-w-[280px] sm:min-w-[350px] md:min-w-[500px] h-[220px] sm:h-[280px] md:h-[350px] relative rounded-lg overflow-hidden gallery-slide border border-white/10 shrink-0">
+                         <img src="images/2018.jpg" class="w-full h-full object-cover" alt="madrid 2018" loading="lazy">
+                        <div class="absolute bottom-0 left-0 w-full p-3 md:p-6 bg-gradient-to-t from-navy-900 to-transparent">
+                             <span class="text-white font-bold block text-base md:text-xl"></span>
+                            <span class="text-gold-500 text-xs md:text-sm uppercase">2018</span>
+                        </div>
+</div>
+<div class="min-w-[280px] sm:min-w-[350px] md:min-w-[500px] h-[220px] sm:h-[280px] md:h-[350px] relative rounded-lg overflow-hidden gallery-slide border border-white/10 shrink-0">
+                         <img src="images/2017.jpg" class="w-full h-full object-cover" alt="madrid 2017" loading="lazy">
+                        <div class="absolute bottom-0 left-0 w-full p-3 md:p-6 bg-gradient-to-t from-navy-900 to-transparent">
+                             <span class="text-white font-bold block text-base md:text-xl"></span>
+                            <span class="text-gold-500 text-xs md:text-sm uppercase">2017</span>
+                        </div>
+</div>
+                  
+
+<button onclick="slideGallery(1)" class="absolute right-0 top-1/2 -translate-y-1/2 z-20 bg-navy-900/80 hover:bg-gold-500 text-gold-500 hover:text-navy-900 w-9 h-9 md:w-12 md:h-12 flex items-center justify-center rounded-full border border-gold-500 transition-all duration-300 -mr-1 md:-mr-8 shadow-lg cursor-pointer" aria-label="Next slide">
+                    <i class="fas fa-chevron-right text-sm md:text-base"></i>
+                </button>
+ </div>
+                    </div>
+
+    </section>
+
+    <!-- SECCIÓN OPEN CALL PREMIUM -->
+    <section class="bg-gradient-to-b from-navy-900 via-navy-800 to-navy-900 border-b border-gold-500/20 py-12 md:py-16">
+        <div class="max-w-5xl mx-auto px-4 sm:px-6">
+            <!-- Header con icono -->
+            <div class="text-center mb-8 md:mb-12">
+                <div class="inline-flex items-center justify-center w-12 h-12 md:w-16 md:h-16 rounded-full bg-gradient-to-br from-gold-500/20 to-teal-400/20 border border-gold-500/50 mb-4 md:mb-6">
+                    <i class="fas fa-megaphone text-gold-500 text-lg md:text-2xl"></i>
+                </div>
+                <h2 class="text-2xl sm:text-3xl md:text-4xl font-header font-bold text-white mb-3 md:mb-4">
+                    Open <span class="text-gold-500">Call</span>
+                </h2>
+                <div class="w-16 h-1 bg-gradient-to-r from-gold-500 to-teal-400 mx-auto"></div>
+            </div>
+
+            <!-- Contenedor principal con borde decorativo -->
+            <div class="relative">
+                <!-- Borde superior decorativo -->
+                <div class="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-gold-500/50 to-transparent"></div>
+                
+                <!-- Contenedor con fondo -->
+                <div class="bg-gradient-to-r from-gold-500/5 via-navy-800 to-teal-400/5 border border-gold-500/20 rounded-lg p-6 md:p-10 backdrop-blur-sm">
+                    
+                    <!-- Contenido principal -->
+                    <div class="mb-8 md:mb-10">
+                        <p class="text-slate-100 text-base md:text-lg leading-relaxed mb-6 text-justify">
+                            We are pleased to announce an <span class="text-gold-500 font-semibold">Open Call</span> for all those interested in participating in the International Longevity Summit Madrid 2026.
+                        </p>
+                        
+                        <!-- Grid de categorías -->
+                        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 md:gap-6 mb-8">
+                            <!-- Posters -->
+                            <div class="flex items-start gap-3 p-3 md:p-4 rounded-lg bg-navy-900/50 border border-gold-500/10 hover:border-gold-500/30 transition-colors duration-300">
+                                <div class="flex-shrink-0 w-8 h-8 md:w-10 md:h-10 rounded-full bg-gold-500/20 flex items-center justify-center mt-1">
+                                    <i class="fas fa-image text-gold-500 text-sm md:text-base"></i>
+                                </div>
+                                <div>
+                                    <h4 class="text-white font-semibold text-sm md:text-base mb-1">Posters</h4>
+                                    <p class="text-slate-300 text-xs md:text-sm">Research presentations</p>
+                                </div>
+                            </div>
+
+                            <!-- Short Talks -->
+                            <div class="flex items-start gap-3 p-3 md:p-4 rounded-lg bg-navy-900/50 border border-gold-500/10 hover:border-gold-500/30 transition-colors duration-300">
+                                <div class="flex-shrink-0 w-8 h-8 md:w-10 md:h-10 rounded-full bg-gold-500/20 flex items-center justify-center mt-1">
+                                    <i class="fas fa-microphone text-gold-500 text-sm md:text-base"></i>
+                                </div>
+                                <div>
+                                    <h4 class="text-white font-semibold text-sm md:text-base mb-1">Short Talks</h4>
+                                    <p class="text-slate-300 text-xs md:text-sm">Brief presentations</p>
+                                </div>
+                            </div>
+
+                            <!-- Startups -->
+                            <div class="flex items-start gap-3 p-3 md:p-4 rounded-lg bg-navy-900/50 border border-gold-500/10 hover:border-gold-500/30 transition-colors duration-300">
+                                <div class="flex-shrink-0 w-8 h-8 md:w-10 md:h-10 rounded-full bg-gold-500/20 flex items-center justify-center mt-1">
+                                    <i class="fas fa-rocket text-gold-500 text-sm md:text-base"></i>
+                                </div>
+                                <div>
+                                    <h4 class="text-white font-semibold text-sm md:text-base mb-1">StartUps</h4>
+                                    <p class="text-slate-300 text-xs md:text-sm">Innovation projects</p>
+                                </div>
+                            </div>
+
+                            <!-- Researchers -->
+                            <div class="flex items-start gap-3 p-3 md:p-4 rounded-lg bg-navy-900/50 border border-gold-500/10 hover:border-gold-500/30 transition-colors duration-300">
+                                <div class="flex-shrink-0 w-8 h-8 md:w-10 md:h-10 rounded-full bg-gold-500/20 flex items-center justify-center mt-1">
+                                    <i class="fas fa-flask text-gold-500 text-sm md:text-base"></i>
+                                </div>
+                                <div>
+                                    <h4 class="text-white font-semibold text-sm md:text-base mb-1">Researchers</h4>
+                                    <p class="text-slate-300 text-xs md:text-sm">Scientific contributions</p>
+                                </div>
+                            </div>
+
+                            <!-- Speakers -->
+                            <div class="flex items-start gap-3 p-3 md:p-4 rounded-lg bg-navy-900/50 border border-gold-500/10 hover:border-gold-500/30 transition-colors duration-300">
+                                <div class="flex-shrink-0 w-8 h-8 md:w-10 md:h-10 rounded-full bg-gold-500/20 flex items-center justify-center mt-1">
+                                    <i class="fas fa-users text-gold-500 text-sm md:text-base"></i>
+                                </div>
+                                <div>
+                                    <h4 class="text-white font-semibold text-sm md:text-base mb-1">Speakers</h4>
+                                    <p class="text-slate-300 text-xs md:text-sm">Conference speakers</p>
+                                </div>
+                            </div>
+
+                            <!-- Sponsors -->
+                            <div class="flex items-start gap-3 p-3 md:p-4 rounded-lg bg-navy-900/50 border border-gold-500/10 hover:border-gold-500/30 transition-colors duration-300">
+                                <div class="flex-shrink-0 w-8 h-8 md:w-10 md:h-10 rounded-full bg-gold-500/20 flex items-center justify-center mt-1">
+                                    <i class="fas fa-handshake text-gold-500 text-sm md:text-base"></i>
+                                </div>
+                                <div>
+                                    <h4 class="text-white font-semibold text-sm md:text-base mb-1">Sponsors</h4>
+                                    <p class="text-slate-300 text-xs md:text-sm">Partnership opportunities</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Texto de instrucciones -->
+                        <div class="bg-navy-900/70 border-l-4 border-gold-500 p-4 md:p-6 rounded-lg mb-8">
+                            <p class="text-slate-100 text-sm md:text-base leading-relaxed text-justify">
+                                If you are interested in any of these categories, please <span class="text-gold-500 font-semibold">register and send your proposal</span> to:
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- CTA Email -->
+                    <div class="flex flex-col sm:flex-row items-center justify-center gap-4 md:gap-6">
+                        <a href="mailto:info@longevitysummit.madrid" class="group relative px-6 md:px-10 py-3 md:py-4 bg-gradient-to-r from-gold-500 to-gold-600 hover:from-gold-600 hover:to-gold-700 text-navy-900 font-bold uppercase tracking-widest rounded-lg transition-all duration-300 shadow-lg hover:shadow-[0_0_30px_rgba(197,160,89,0.4)] text-xs md:text-sm">
+                            <span class="flex items-center gap-2 md:gap-3">
+                                <i class="fas fa-envelope"></i>
+                                Send Your Proposal
+                            </span>
+                        </a>
+                        <div class="text-center sm:text-left">
+                            <p class="text-slate-300 text-xs md:text-sm font-mono">info@longevitysummit.madrid</p>
+                            <p class="text-slate-400 text-xs mt-1">We look forward to your contribution</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Borde inferior decorativo -->
+                <div class="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-teal-400/50 to-transparent"></div>
+            </div>
+        </div>
+    </section>
+
+    <section id="speakers" class="bg-navy-900">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-12 md:mb-16">
+                <h2 class="text-2xl sm:text-3xl md:text-4xl font-header font-bold text-white">World-Class <span class="text-teal-400">Speakers</span></h2>
+                <div class="mt-6 md:mt-8 animate-pulse-slow">
+                    <span class="inline-block border-b border-gold-500 pb-2 text-lg md:text-2xl font-header font-medium text-gold-500 tracking-[0.3em] uppercase shadow-lg">
+                        Speakers 2026 Coming Soon
+                    </span>
+                </div>
+            </div>
+            <!-- CONTENEDORES CIRCULARES PARA SPEAKERS 2026 -->
+            <div id="speakers-2026-grid" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4 md:gap-8 text-center mb-12">
+                <div class="speaker-card group relative animate-fade-in text-center">
+                    <img src="images/poulain.jpg" class="speaker-img w-20 h-20 sm:w-24 sm:h-24 md:w-32 md:h-32 rounded-full mx-auto object-cover mb-3 md:mb-4 bg-navy-800 border-4 border-transparent hover:border-teal-400" alt="Speaker 2026 - Michel Poulain" loading="lazy">
+                    <h3 class="text-xs sm:text-sm text-white font-bold">Michel Poulain, PhD</h3>
+                    <p class="text-[9px] sm:text-[10px] text-slate-400 uppercase tracking-wide mb-1"></p>
+                    <p class="text-xs text-teal-400 font-medium">Cofounder of the Blue Zones concept</p>
+                </div>
+                <div class="speaker-card group relative animate-fade-in text-center">
+                    <img src="images/newman.jpg" class="speaker-img w-20 h-20 sm:w-24 sm:h-24 md:w-32 md:h-32 rounded-full mx-auto object-cover mb-3 md:mb-4 bg-navy-800 border-4 border-transparent hover:border-teal-400" alt="Speaker 2026 - 2" loading="lazy">
+                    <h3 class="text-xs sm:text-sm text-white font-bold">Phil Newman</h3>
+                    <p class="text-[9px] sm:text-[10px] text-slate-400 uppercase tracking-wide mb-1"></p>
+                    <p class="text-xs text-teal-400 font-medium">CEO & Founder Longevity Technology</p>
+                </div>
+                <div class="speaker-card group relative animate-fade-in text-center">
+                    <img src="images/kennedy.jpg" class="speaker-img w-20 h-20 sm:w-24 sm:h-24 md:w-32 md:h-32 rounded-full mx-auto object-cover mb-3 md:mb-4 bg-navy-800 border-4 border-transparent hover:border-teal-400" alt="Speaker 2026 - 2" loading="lazy">
+                    <h3 class="text-xs sm:text-sm text-white font-bold">Brian Kennedy, PhD</h3>
+                    <p class="text-[9px] sm:text-[10px] text-slate-400 uppercase tracking-wide mb-1"></p>
+                    <p class="text-xs text-teal-400 font-medium">National University Singapore</p>
+                </div>
+                <div class="speaker-card group relative animate-fade-in text-center">
+                    <img src="images/blasco.jpg" class="speaker-img w-20 h-20 sm:w-24 sm:h-24 md:w-32 md:h-32 rounded-full mx-auto object-cover mb-3 md:mb-4 bg-navy-800 border-4 border-transparent hover:border-teal-400" alt="Speaker 2026 - 3" loading="lazy">
+                    <h3 class="text-xs sm:text-sm text-white font-bold">Maria Blasco, PhD</h3>
+                    <p class="text-[9px] sm:text-[10px] text-slate-400 uppercase tracking-wide mb-1"></p>
+                    <p class="text-xs text-teal-400 font-medium">Head, Telomeres and Telomerase Group, CNIO</p>
+                </div>
+                <div class="speaker-card group relative animate-fade-in text-center">
+                    <img src="images/5.jpg" class="speaker-img w-20 h-20 sm:w-24 sm:h-24 md:w-32 md:h-32 rounded-full mx-auto object-cover mb-3 md:mb-4 bg-navy-800 border-4 border-transparent hover:border-teal-400" alt="Speaker 2026 - 4" loading="lazy">
+                    <h3 class="text-xs sm:text-sm text-white font-bold">Aubrey de Grey, PhD</h3>
+                    <p class="text-[9px] sm:text-[10px] text-slate-400 uppercase tracking-wide mb-1"></p>
+                    <p class="text-xs text-teal-400 font-medium">Cambridge University</p>
+                </div>
+                <div class="speaker-card group relative animate-fade-in text-center">
+                    <img src="images/coles.jpg" class="speaker-img w-20 h-20 sm:w-24 sm:h-24 md:w-32 md:h-32 rounded-full mx-auto object-cover mb-3 md:mb-4 bg-navy-800 border-4 border-transparent hover:border-teal-400" alt="Speaker 2026 - 5" loading="lazy">
+                    <h3 class="text-xs sm:text-sm text-white font-bold">Natalie Coles</h3>
+                    <p class="text-[9px] sm:text-[10px] text-slate-400 uppercase tracking-wide mb-1"></p>
+                    <p class="text-xs text-teal-400 font-medium">Director of Supercentenarian Research, LEV Foundation</p>
+                </div>
+                <div class="speaker-card group relative animate-fade-in text-center">
+                    <img src="images/joao.jpg" class="speaker-img w-20 h-20 sm:w-24 sm:h-24 md:w-32 md:h-32 rounded-full mx-auto object-cover mb-3 md:mb-4 bg-navy-800 border-4 border-transparent hover:border-teal-400" alt="Speaker 2026 - 6" loading="lazy">
+                    <h3 class="text-xs sm:text-sm text-white font-bold">João Pedro de Magalhães, PhD</h3>
+                    <p class="text-[9px] sm:text-[10px] text-slate-400 uppercase tracking-wide mb-1"></p>
+                    <p class="text-xs text-teal-400 font-medium">Chair of Molecular Biogerontology, University of Birmingham</p>
+                </div>
+                <div class="speaker-card group relative animate-fade-in text-center">
+                    <img src="images/4.jpg" class="speaker-img w-20 h-20 sm:w-24 sm:h-24 md:w-32 md:h-32 rounded-full mx-auto object-cover mb-3 md:mb-4 bg-navy-800 border-4 border-transparent hover:border-teal-400" alt="Speaker 2026 - 7" loading="lazy">
+                    <h3 class="text-xs sm:text-sm text-white font-bold">Liz Parrish, MBA</h3>
+                    <p class="text-[9px] sm:text-[10px] text-slate-400 uppercase tracking-wide mb-1"></p>
+                    <p class="text-xs text-teal-400 font-medium">CEO BioViva</p>
+                </div>
+<div class="speaker-card group relative animate-fade-in text-center">
+                    <img src="images/tina.jpg" class="speaker-img w-20 h-20 sm:w-24 sm:h-24 md:w-32 md:h-32 rounded-full mx-auto object-cover mb-3 md:mb-4 bg-navy-800 border-4 border-transparent hover:border-teal-400" alt="Speaker 2026 - 8" loading="lazy">
+                    <h3 class="text-xs sm:text-sm text-white font-bold">Tina Woods</h3>
+                    <p class="text-[9px] sm:text-[10px] text-slate-400 uppercase tracking-wide mb-1"></p>
+                    <p class="text-xs text-teal-400 font-medium">Founder and CEO, Collider Health</p>
+                </div>
+
+                <div class="speaker-card group relative animate-fade-in text-center">
+                    <img src="images/perez.png" class="speaker-img w-20 h-20 sm:w-24 sm:h-24 md:w-32 md:h-32 rounded-full mx-auto object-cover mb-3 md:mb-4 bg-navy-800 border-4 border-transparent hover:border-teal-400" alt="Speaker 2026 - 8" loading="lazy">
+                    <h3 class="text-xs sm:text-sm text-white font-bold">Dr Arturo Fernández-Cruz</h3>
+                    <p class="text-[9px] sm:text-[10px] text-slate-400 uppercase tracking-wide mb-1"></p>
+                    <p class="text-xs text-teal-400 font-medium">President of the Fernández-Cruz Foundation</p>
+                </div>
+<div class="speaker-card group relative animate-fade-in text-center">
+                    <img src="images/more.jpg" class="speaker-img w-20 h-20 sm:w-24 sm:h-24 md:w-32 md:h-32 rounded-full mx-auto object-cover mb-3 md:mb-4 bg-navy-800 border-4 border-transparent hover:border-teal-400" alt="Speaker 2026 - 8" loading="lazy">
+                    <h3 class="text-xs sm:text-sm text-white font-bold"></h3>
+                    <p class="text-[9px] sm:text-[10px] text-slate-400 uppercase tracking-wide mb-1"></p>
+                    <p class="text-xs text-teal-400 font-medium"></p>
+                </div>
+<div class="speaker-card group relative animate-fade-in text-center">
+                    <img src="images/more.jpg" class="speaker-img w-20 h-20 sm:w-24 sm:h-24 md:w-32 md:h-32 rounded-full mx-auto object-cover mb-3 md:mb-4 bg-navy-800 border-4 border-transparent hover:border-teal-400" alt="Speaker 2026 - 8" loading="lazy">
+                    <h3 class="text-xs sm:text-sm text-white font-bold"></h3>
+                    <p class="text-[9px] sm:text-[10px] text-slate-400 uppercase tracking-wide mb-1"></p>
+                    <p class="text-xs text-teal-400 font-medium"></p>
+                </div>
+<div class="speaker-card group relative animate-fade-in text-center">
+                    <img src="images/more.jpg" class="speaker-img w-20 h-20 sm:w-24 sm:h-24 md:w-32 md:h-32 rounded-full mx-auto object-cover mb-3 md:mb-4 bg-navy-800 border-4 border-transparent hover:border-teal-400" alt="Speaker 2026 - 8" loading="lazy">
+                    <h3 class="text-xs sm:text-sm text-white font-bold"></h3>
+                    <p class="text-[9px] sm:text-[10px] text-slate-400 uppercase tracking-wide mb-1"></p>
+                    <p class="text-xs text-teal-400 font-medium"></p>
+                </div>
+<div class="speaker-card group relative animate-fade-in text-center">
+                    <img src="images/more.jpg" class="speaker-img w-20 h-20 sm:w-24 sm:h-24 md:w-32 md:h-32 rounded-full mx-auto object-cover mb-3 md:mb-4 bg-navy-800 border-4 border-transparent hover:border-teal-400" alt="Speaker 2026 - 8" loading="lazy">
+                    <h3 class="text-xs sm:text-sm text-white font-bold"></h3>
+                    <p class="text-[9px] sm:text-[10px] text-slate-400 uppercase tracking-wide mb-1"></p>
+                    <p class="text-xs text-teal-400 font-medium"></p>
+                </div>
+
+            </div>
+
+            <!-- SEPARADOR SPEAKERS 2025 -->
+            <div class="separator-2025">
+                <span>Speakers 2025</span>
+            </div>
+
+            <!-- CONTENEDORES CIRCULARES PARA SPEAKERS 2025 (ORIGINALES) -->
+            <div id="speakers-grid" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4 md:gap-8 text-center mb-12">
+                <div class="speaker-card group relative animate-fade-in text-center">
+                    <img src="images/almeida.jpg" class="speaker-img w-20 h-20 sm:w-24 sm:h-24 md:w-32 md:h-32 rounded-full mx-auto object-cover mb-3 md:mb-4 bg-navy-800 border-4 border-transparent hover:border-teal-400" alt="alcalde de madrid" loading="lazy">
+                    <h3 class="text-xs sm:text-sm text-white font-bold">José Luis Martínez Almeida</h3>
+                    <p class="text-[9px] sm:text-[10px] text-slate-400 uppercase tracking-wide mb-1"></p>
+                    <p class="text-xs text-teal-400 font-medium">Mayor of Madrid (most longevous capital in the EU)</p>
+                </div>
+                <div class="speaker-card group relative animate-fade-in text-center">
+                    <img src="images/1.jpg" class="speaker-img w-20 h-20 sm:w-24 sm:h-24 md:w-32 md:h-32 rounded-full mx-auto object-cover mb-3 md:mb-4 bg-navy-800 border-4 border-transparent hover:border-teal-400" alt="Doctor Church" loading="lazy">
+                    <h3 class="text-xs sm:text-sm text-white font-bold">George Church</h3>
+                    <p class="text-[9px] sm:text-[10px] text-slate-400 uppercase tracking-wide mb-1"></p>
+                    <p class="text-xs text-teal-400 font-medium">Professor at Harvard Medical School & MIT</p>
+                </div>
+                <div class="speaker-card group relative animate-fade-in text-center">
+                    <img src="images/2.jpg" class="speaker-img w-20 h-20 sm:w-24 sm:h-24 md:w-32 md:h-32 rounded-full mx-auto object-cover mb-3 md:mb-4 bg-navy-800 border-4 border-transparent hover:border-teal-400" alt="ingeniero de google" loading="lazy">
+                    <h3 class="text-xs sm:text-sm text-white font-bold">Ray Kurzweil, PhD</h3>
+                    <p class="text-[9px] sm:text-[10px] text-slate-400 uppercase tracking-wide mb-1"></p>
+                    <p class="text-xs text-teal-400 font-medium">Kurzweil Technologies</p>
+                </div>
+                <div class="speaker-card group relative animate-fade-in text-center">
+                    <img src="images/cole.jpg" class="speaker-img w-20 h-20 sm:w-24 sm:h-24 md:w-32 md:h-32 rounded-full mx-auto object-cover mb-3 md:mb-4 bg-navy-800 border-4 border-transparent hover:border-teal-400" alt="Andrea Maier" loading="lazy">
+                    <h3 class="text-xs sm:text-sm text-white font-bold">Andrea B. Maier, MD</h3>
+                    <p class="text-[9px] sm:text-[10px] text-slate-400 uppercase tracking-wide mb-1"></p>
+                    <p class="text-xs text-teal-400 font-medium">Founding President, Healthy Longevity Medicine Society </p>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <section id="agenda" class="bg-navy-900 border-t border-white/5">
+        <div class="max-w-4xl mx-auto">
+            <h2 class="text-2xl sm:text-3xl md:text-3xl font-header font-bold text-white mb-8 md:mb-12 text-center">Summit <span class="text-gold-500">Agenda</span></h2>
+            <div class="border-l-2 border-white/10 ml-3 sm:ml-4 space-y-8 md:space-y-12">
+                <div class="relative pl-6 sm:pl-8">
+                    <div class="absolute -left-[9px] top-0 w-4 h-4 rounded-full bg-teal-400 shadow-[0_0_15px_rgba(100,255,218,0.5)]"></div>
+                    <span class="text-teal-400 font-mono text-xs md:text-sm uppercase tracking-wide">28-29 September</span>
+                    <h3 class="text-base md:text-xl text-white font-bold mt-1 md:mt-2">Tours & Cultural Visits</h3>
+                    <p class="text-slate-200 text-xs md:text-sm mt-1 md:mt-2">Exclusive access to Madrid's scientific and royal landmarks.</p>
+                </div>
+                <div class="relative pl-6 sm:pl-8">
+                    <div class="absolute -left-[9px] top-0 w-4 h-4 rounded-full bg-gold-500 shadow-[0_0_15px_rgba(197,160,89,0.5)]"></div>
+                    <span class="text-gold-500 font-mono text-xs md:text-sm uppercase tracking-wide">30 september - 1 October</span>
+                    <h3 class="text-base md:text-xl text-white font-bold mt-1 md:mt-2">Main Conference</h3>
+                    <p class="text-slate-200 text-xs md:text-sm mt-1 md:mt-2">World-class leaders and academics guide us through the latest technological breakthroughs in health and longevity.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="tours" class="bg-navy-800 border-t border-b border-white/5">
+        <div class="max-w-7xl mx-auto">
+            <div class="flex flex-col md:flex-row justify-between items-start md:items-end mb-8 md:mb-16">
+                <div>
+                    <h2 class="text-2xl sm:text-3xl md:text-3xl font-header font-bold text-white mb-2">Exclusive <span class="text-teal-400">Experiences</span></h2>
+                    <p class="text-slate-100 mt-3 md:mt-4 max-w-xl text-xs sm:text-sm md:text-base text-justify">Join us on september 28-29 for curated visits to the intersection of history and futuristic science in Madrid.</p>
+                </div>
+                <a href="#tickets" class="hidden md:block text-gold-500 border-b border-gold-500 pb-1 hover:text-white hover:border-white transition mt-4 md:mt-0 text-sm">Book Experience Access <i class="fas fa-arrow-right ml-2"></i></a>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-8 justify-center mx-auto max-w-5xl">
+                <div class="tour-card relative group rounded-lg overflow-hidden h-[250px] sm:h-[300px] md:h-[400px] border border-white/5 cursor-pointer">
+                    <img src="https://images.unsplash.com/photo-1543783207-ec64e4d95325?q=80&w=1000&auto=format&fit=crop" class="absolute inset-0 w-full h-full object-cover transition duration-700 group-hover:scale-110" alt="UNESCO world heritage" loading="lazy">
+                    <div class="absolute inset-0 bg-gradient-to-t from-navy-900 via-navy-900/60 to-transparent opacity-90"></div>
+                    <div class="absolute bottom-0 left-0 p-4 md:p-8 w-full tour-content">
+                        <span class="bg-gold-500 text-navy-900 text-[9px] md:text-[10px] font-bold px-2 py-1 uppercase tracking-widest rounded mb-2 md:mb-3 inline-block">Cultural</span>
+                        <h3 class="text-base md:text-2xl font-bold text-white mb-1 md:mb-2">UNESCO world heritage Tours</h3>
+                        <p class="text-slate-300 text-xs md:text-sm line-clamp-3 mb-3 md:mb-4 group-hover:line-clamp-none transition-all">Explore the architectural wonders and rich history of heritage sites near the city.</p>
+                    </div>
+                </div>
+                               <div class="tour-card relative group rounded-lg overflow-hidden h-[250px] sm:h-[300px] md:h-[400px] border border-white/5 cursor-pointer">
+                    <img src="images/cocktail.jpg" onerror="this.src='https://images.unsplash.com/photo-1514362545857-3bc16c4c7d1b?q=80&w=1000&auto=format&fit=crop'" class="absolute inset-0 w-full h-full object-contain object-top transition duration-700 group-hover:scale-110" alt="Madrid Welcome VIP Cocktail" loading="lazy">
+                    <div class="absolute inset-0 bg-gradient-to-t from-navy-900 via-navy-900/60 to-transparent opacity-90"></div>
+                    <div class="absolute bottom-0 left-0 p-4 md:p-8 w-full tour-content">
+                        <span class="bg-white text-navy-900 text-[9px] md:text-[10px] font-bold px-2 py-1 uppercase tracking-widest rounded mb-2 md:mb-3 inline-block">Networking</span>
+                        <h3 class="text-base md:text-2xl font-bold text-white mb-1 md:mb-2">Madrid Welcome VIP Cocktail</h3>
+                        <p class="text-slate-300 text-xs md:text-sm line-clamp-3 mb-3 md:mb-4 group-hover:line-clamp-none transition-all">This cocktail is an excellent opportunity to meet the various participants of the event and exchange opinions and experiences</p>
+                    </div>
+                </div>
+                <div class="tour-card relative group rounded-lg overflow-hidden h-[250px] sm:h-[300px] md:h-[400px] border border-white/5 cursor-pointer">
+                    <img src="images/rave.jpg" onerror="this.src='https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?q=80&w=1000&auto=format&fit=crop'" class="absolute inset-0 w-full h-full object-cover transition duration-700 group-hover:scale-110" alt="Longevity Rave" loading="lazy">
+                    <div class="absolute inset-0 bg-gradient-to-t from-navy-900 via-navy-900/60 to-transparent opacity-90"></div>
+                    <div class="absolute bottom-0 left-0 p-4 md:p-8 w-full tour-content">
+                        <span class="bg-purple-500 text-white text-[9px] md:text-[10px] font-bold px-2 py-1 uppercase tracking-widest rounded mb-2 md:mb-3 inline-block">Party</span>
+                        <h3 class="text-base md:text-2xl font-bold text-white mb-1 md:mb-2">Madrid Longevity Rave Party</h3>
+                        <p class="text-slate-300 text-xs md:text-sm line-clamp-3 mb-3 md:mb-4 group-hover:line-clamp-none transition-all">Experience a futuristic celebration filled with immersive music and vibrant energy.</p>
+                    </div>
+</div>
+
+
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="tickets" class="bg-navy-800 border-t border-gold-500/30">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-8 md:mb-12">
+                <h2 class="text-3xl md:text-4xl font-header font-bold text-white mb-2">Program: <span class="text-gold-500">Tickets</span></h2>
+                <p class="text-sm md:text-lg text-white font-bold">International Longevity Summit: Sep 30 & Oct 1, 2026</p>
+                <p class="text-xs md:text-sm text-teal-400">UNESCO World Heritage Tours: Sep 28-29, 2026</p>
+            </div>
+            <div class="overflow-x-auto shadow-2xl rounded-lg border border-white/10">
+                <table class="w-full text-left border-collapse min-w-[600px] md:min-w-full">
+                    <thead class="bg-navy-900 text-white text-center font-header text-xs md:text-sm uppercase">
+                        <tr>
+                            <th class="p-2 md:p-4 text-left pl-3 md:pl-6">Tickets</th>
+                            <th class="p-2 md:p-4 bg-gold-500/20 text-gold-500 text-xs md:text-sm">Early Bird <br><span class="text-[8px] md:text-[10px] opacity-70">(until April 1)</span></th>
+                            <th class="p-2 md:p-4 text-xs md:text-sm">Standard <br><span class="text-[8px] md:text-[10px] opacity-70">(until Sep 28)</span></th>
+                            <th class="p-2 md:p-4 text-xs md:text-sm">Full Rate <br><span class="text-[8px] md:text-[10px] opacity-70">(from Sep 28)</span></th>
+                        </tr>
+                    </thead>
+                    <tbody class="text-white text-xs md:text-sm font-medium bg-navy-800">
+                        <tr class="border-b border-white/5 hover:bg-white/5"><td class="p-2 md:p-4 pl-3 md:pl-6 text-white font-bold text-xs md:text-sm">Conferences (2 Days)</td><td class="p-2 md:p-4 text-center text-gold-500 font-bold text-xs md:text-sm">199 €</td><td class="p-2 md:p-4 text-center text-xs md:text-sm">249 €</td><td class="p-2 md:p-4 text-center text-xs md:text-sm">299 €</td></tr>
+                        <tr class="border-b border-white/5 hover:bg-white/5"><td class="p-2 md:p-4 pl-3 md:pl-6 text-xs md:text-sm">Tour: Alcalá, Toledo y Aranjuez (Sep 28)+</td><td class="p-2 md:p-4 text-center text-gold-500 font-bold text-xs md:text-sm">99 €</td><td class="p-2 md:p-4 text-center text-xs md:text-sm">129 €</td><td class="p-2 md:p-4 text-center text-xs md:text-sm">149 €</td></tr>
+                        <tr class="border-b border-white/5 hover:bg-white/5"><td class="p-2 md:p-4 pl-3 md:pl-6 text-xs md:text-sm">Tour: Ávila, Segovia y El Escorial (Sep 29)</td><td class="p-2 md:p-4 text-center text-gold-500 font-bold text-xs md:text-sm">99 €</td><td class="p-2 md:p-4 text-center text-xs md:text-sm">129 €</td><td class="p-2 md:p-4 text-center text-xs md:text-sm">149 €</td></tr>
+                        <tr class="border-b border-white/5 hover:bg-white/5"><td class="p-2 md:p-4 pl-3 md:pl-6 text-xs md:text-sm">Welcome 
+VIP Cocktail</td><td class="p-2 md:p-4 text-center text-gold-500 font-bold text-xs md:text-sm">70 €</td><td class="p-2 md:p-4 text-center text-xs md:text-sm">89 €</td><td class="p-2 md:p-4 text-center text-xs md:text-sm">99 €</td></tr>
+                        <tr class="border-b border-white/5 hover:bg-white/5"><td class="p-2 md:p-4 pl-3 md:pl-6 text-xs md:text-sm">Longevity Rave Party</td><td class="p-2 md:p-4 text-center text-gold-500 font-bold text-xs md:text-sm">29 €</td><td class="p-2 md:p-4 text-center text-xs md:text-sm">39 €</td><td class="p-2 md:p-4 text-center text-xs md:text-sm">49 €</td></tr>
+                        <tr class="border-b border-white/5 hover:bg-white/5"><td class="p-2 md:p-4 pl-3 md:pl-6 text-xs md:text-sm">Virtual Conferences (2 Days)</td><td class="p-2 md:p-4 text-center text-gold-500 font-bold text-xs md:text-sm">19 €</td><td class="p-2 md:p-4 text-center text-xs md:text-sm">29 €</td><td class="p-2 md:p-4 text-center text-xs md:text-sm">39 €</td></tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="text-center mt-6"><button class="bg-gold-500 text-navy-900 font-bold px-6 md:px-8 py-3 rounded hover:bg-white transition uppercase text-sm w-full md:w-auto">Pay with PayPal</button></div>
+        </div>
+
+    </section>
+
+<section id="sponsors-logos" class="py-8 md:py-12 bg-white border-t border-gray-100 overflow-hidden">
+    <div class="relative w-full px-4">
+        <div class="max-w-6xl mx-auto">
+            <h4 class="text-center text-xl md:text-2xl font-bold text-navy-900 mb-8 uppercase tracking-widest">Official Sponsors</h4>
+
+            <div class="flex flex-wrap justify-center items-center gap-6 mb-12">
+                <div class="relative group">
+                    <div class="absolute -inset-1 bg-gradient-to-r from-slate-300 to-slate-200 rounded-lg opacity-30 group-hover:opacity-100 blur-sm transition"></div>
+                    <a href="https://www.omniscope.com" target="_blank" class="relative block bg-white rounded-lg p-2">
+                        <div class="absolute -top-4 left-1/2 -translate-x-1/2 bg-gradient-to-r from-slate-300 to-slate-200 text-slate-800 text-xs font-bold px-3 py-1 rounded-full">PLATINUM</div>
+                      <img src="images/200.jpg" class="h-16 md:h-20 w-auto object-contain grayscale group-hover:grayscale-0 transition duration-300">
+                    </a>
+                </div>
+            </div>
+
+            <div id="gold-container" class="flex flex-wrap justify-center items-center gap-4 mb-12 px-2"></div>
+
+            <div id="silver-container" class="flex flex-wrap justify-center items-center gap-4 mb-12 px-2 border-t border-gray-50 pt-8"></div>
+
+            <div id="institutional-container" class="flex flex-wrap justify-center items-center gap-3 sm:gap-4 lg:gap-6 px-2 border-t border-gray-50 pt-8"></div>
+
+        </div>
+    </div>
+</section>
+    <section id="committee" class="bg-navy-800 relative border-t border-white/5">
+        <div class="max-w-7xl mx-auto">
+            <div class="mb-16 md:mb-24">
+                <h2 class="text-2xl sm:text-3xl md:text-3xl font-header font-bold text-white mb-6 md:mb-10 text-center">Scientific <span class="text-teal-400">Committee, Conference Chair: José Luis Cordeiro, MBA, PhD</span></h2>
+                <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-5 gap-3 md:gap-4">
+                    <div class="bg-navy-900 p-3 md:p-4 border border-white/5 hover:border-teal-400/50 transition duration-300"><h4 class="text-white font-bold text-xs md:text-sm">George Church, PhD</h4><p class="text-teal-400 text-xs mt-1">Harvard University</p></div>
+                    <div class="bg-navy-900 p-3 md:p-4 border border-white/5 hover:border-teal-400/50 transition duration-300"><h4 class="text-white font-bold text-xs md:text-sm">Aubrey de Grey, PhD</h4><p class="text-teal-400 text-xs mt-1">University of Cambridge</p></div>
+                    <div class="bg-navy-900 p-3 md:p-4 border border-white/5 hover:border-teal-400/50 transition duration-300"><h4 class="text-white font-bold text-xs md:text-sm">Francisco Mera Cordero, MD</h4><p class="text-teal-400 text-xs mt-1">Universidad San Ignacio de Loyola Lima</p></div>
+                    <div class="bg-navy-900 p-3 md:p-4 border border-white/5 hover:border-teal-400/50 transition duration-300"><h4 class="text-white font-bold text-xs md:text-sm">José Serrés, PhD</h4><p class="text-teal-400 text-xs mt-1">Universidad de Sevilla</p></div>
+                    <div class="bg-navy-900 p-3 md:p-4 border border-white/5 hover:border-teal-400/50 transition duration-300"><h4 class="text-white font-bold text-xs md:text-sm">Juan Carlos Méndez, MD</h4><p class="text-teal-400 text-xs mt-1">Universidad de los Andes</p></div>
+                    <div class="bg-navy-900 p-3 md:p-4 border border-white/5 hover:border-teal-400/50 transition duration-300"><h4 class="text-white font-bold text-xs md:text-sm">Rodolfo Goya, PhD</h4><p class="text-teal-400 text-xs mt-1">Universidad Nacional de La Plata</p></div>
+                    <div class="bg-navy-900 p-3 md:p-4 border border-white/5 hover:border-teal-400/50 transition duration-300"><h4 class="text-white font-bold text-xs md:text-sm">João Pedro de Magalhães, PhD</h4><p class="text-teal-400 text-xs mt-1">University of Liverpool</p></div>
+                    <div class="bg-navy-900 p-3 md:p-4 border border-white/5 hover:border-teal-400/50 transition duration-300"><h4 class="text-white font-bold text-xs md:text-sm">Felipe Debasa, PhD</h4><p class="text-teal-400 text-xs mt-1">Universidad Rey Juan Carlos</p></div>
+                    <div class="bg-navy-900 p-3 md:p-4 border border-white/5 hover:border-teal-400/50 transition duration-300"><h4 class="text-white font-bold text-xs md:text-sm">Natasha Vita-More, PhD</h4><p class="text-teal-400 text-xs mt-1">University of Plymouth</p></div>
+                    <div class="bg-navy-900 p-3 md:p-4 border border-white/5 hover:border-teal-400/50 transition duration-300"><h4 class="text-white font-bold text-xs md:text-sm">Ben Goertzel, PhD</h4><p class="text-teal-400 text-xs mt-1">Temple University</p></div>
+                    <div class="bg-navy-900 p-3 md:p-4 border border-white/5 hover:border-teal-400/50 transition duration-300"><h4 class="text-white font-bold text-xs md:text-sm">Ramón Risco, PhD</h4><p class="text-teal-400 text-xs mt-1">Universidad de Sevilla</p></div>
+                    <div class="bg-navy-900 p-3 md:p-4 border border-white/5 hover:border-teal-400/50 transition duration-300"><h4 class="text-white font-bold text-xs md:text-sm">Anders Sandberg, PhD</h4><p class="text-teal-400 text-xs mt-1"> University of Oxford</p></div>
+                </div>
+            </div>
+            <div class="mb-16 md:mb-24">
+                <h2 class="text-2xl sm:text-3xl md:text-3xl font-header font-bold text-white mb-6 md:mb-10 text-center">Organizing <span class="text-teal-400">Committee</span></h2>
+                <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-5 gap-3 md:gap-4">
+                    <div class="bg-navy-900 p-3 md:p-4 border border-white/5 hover:border-gold-500/50 transition duration-300"><h4 class="text-white font-bold text-xs md:text-sm">Maristela Bermúdez</h4><p class="text-teal-400 text-xs mt-1">Director public relations, International Longevity Summit</p></div>
+                    <div class="bg-navy-900 p-3 md:p-4 border border-white/5 hover:border-gold-500/50 transition duration-300"><h4 class="text-white font-bold text-xs md:text-sm">Antonio Mora</h4><p class="text-teal-400 text-xs mt-1">Board of directors ICOMEM</p></div>
+                    <div class="bg-navy-900 p-3 md:p-4 border border-white/5 hover:border-gold-500/50 transition duration-300"><h4 class="text-white font-bold text-xs md:text-sm">Sergio Tarrero, BSc</h4><p class="text-teal-400 text-xs mt-1">Futurist Alliance, Videos</p></div>
+                    <div class="bg-navy-900 p-3 md:p-4 border border-white/5 hover:border-gold-500/50 transition duration-300"><h4 class="text-white font-bold text-xs md:text-sm">Raúl Ortiz</h4><p class="text-teal-400 text-xs mt-1">DMDima Comunicación</p></div>
+                    <div class="bg-navy-900 p-3 md:p-4 border border-white/5 hover:border-gold-500/50 transition duration-300"><h4 class="text-white font-bold text-xs md:text-sm">Pere Fortea</h4><p class="text-teal-400 text-xs mt-1">Backend Developer</p></div>
+                    <div class="bg-navy-900 p-3 md:p-4 border border-white/5 hover:border-gold-500/50 transition duration-300"><h4 class="text-white font-bold text-xs md:text-sm">Justo Maurín</h4><p class="text-teal-400 text-xs mt-1">Campus Corner, logistics</p></div>
+                    <div class="bg-navy-900 p-3 md:p-4 border border-white/5 hover:border-gold-500/50 transition duration-300"><h4 class="text-white font-bold text-xs md:text-sm">Gabriel Vásquez, MSc</h4><p class="text-teal-400 text-xs mt-1">Founder of ConsciencesAI, Speakers</p></div>
+                    <div class="bg-navy-900 p-3 md:p-4 border border-white/5 hover:border-gold-500/50 transition duration-300"><h4 class="text-white font-bold text-xs md:text-sm">Miguel Ferrero</h4><p class="text-teal-400 text-xs mt-1">Neuropsychologist, NoName Sports, Sponsors</p></div>
+                   <div class="bg-navy-900 p-3 md:p-4 border border-white/5 hover:border-gold-500/50 transition duration-300"><h4 class="text-white font-bold text-xs md:text-sm">Eduardo Riveros, MSc</h4><p class="text-teal-400 text-xs mt-1">Frontend Developer</p></div>
+		    </div>
+            </div>
+            <div class="mt-16 md:mt-24 text-center">
+                <h2 class="text-2xl sm:text-3xl md:text-3xl font-header font-bold text-white mb-6 md:mb-10">Honorary <span class="text-teal-400">Committee</span></h2>
+                <div class="grid grid-cols-1 md:grid-cols-4 gap-3 md:gap-4 text-left">
+                    <div class="bg-navy-900 p-3 md:p-4 border border-white/5 hover:border-gold-500/50 transition duration-300">
+                        <h4 class="text-white font-bold text-xs md:text-sm">Ramón Tamames, PhD</h4>
+                        <p class="text-teal-400 text-xs mt-1">Member Royal Academy of Moral and Political Sciences</p>
+                    </div>
+                    <div class="bg-navy-900 p-3 md:p-4 border border-white/5 hover:border-gold-500/50 transition duration-300">
+                        <h4 class="text-white font-bold text-xs md:text-sm">Arturo Fernández Cruz, PhD</h4>
+                        <p class="text-teal-400 text-xs mt-1">Full Member Royal National Academy of Medicine</p>
+                    </div>
+                    <div class="bg-navy-900 p-3 md:p-4 border border-white/5 hover:border-gold-500/50 transition duration-300">
+                        <h4 class="text-white font-bold text-xs md:text-sm">Esther Koplowitz</h4>
+                        <p class="text-teal-400 text-xs mt-1">Spanish Aristocrat, President of Esther Koplowitz Foundation</p>
+                    </div>
+                    <div class="bg-navy-900 p-3 md:p-4 border border-white/5 hover:border-gold-500/50 transition duration-300">
+                        <h4 class="text-white font-bold text-xs md:text-sm">Antonio Garrigues Walker, JD</h4>
+                        <p class="text-teal-400 text-xs mt-1">Honorary President, Antonio Garrigues Foundation</p>
+                    </div>
+                    <div class="bg-navy-900 p-3 md:p-4 border border-white/5 hover:border-gold-500/50 transition duration-300">
+                        <h4 class="text-white font-bold text-xs md:text-sm">Pilar Muro Navarro</h4>
+                        <p class="text-teal-400 text-xs mt-1">Fine Arts, Ex-President of the Quirón Hospital Group</p>
+                    </div>
+                    <div class="bg-navy-900 p-3 md:p-4 border border-white/5 hover:border-gold-500/50 transition duration-300">
+                        <h4 class="text-white font-bold text-xs md:text-sm">Pedro Guillén García, MD</h4>
+                        <p class="text-teal-400 text-xs mt-1">Fellow, Royal Academy de Medicine of Spain</p>
+                    </div>
+                    <div class="bg-navy-900 p-3 md:p-4 border border-white/5 hover:border-gold-500/50 transition duration-300">
+                        <h4 class="text-white font-bold text-xs md:text-sm">Mehmood Khan, MD</h4>
+                        <p class="text-teal-400 text-xs mt-1">Chief Executive Officer of Hevolution Foundation</p>
+                    </div>
+                    <div class="bg-navy-900 p-3 md:p-4 border border-white/5 hover:border-gold-500/50 transition duration-300">
+                        <h4 class="text-white font-bold text-xs md:text-sm">Eduardo Díaz Rubio, MD</h4>
+                        <p class="text-teal-400 text-xs mt-1">President of the Royal National Academy of Medicine of Spain</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="bg-navy-900 border-t border-white/10 pt-12 md:pt-16 pb-8 md:pb-12 text-center relative z-10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6">
+            <div class="mb-6 md:mb-8">
+                <h4 class="text-lg md:text-2xl font-header font-bold text-white tracking-widest mb-3 md:mb-4">InternationalLongevitySummit<span class="text-gold-500">MADRID</span></h4>
+                <p class="text-slate-200 text-xs md:text-sm">© 2026 International Longevity Summit Madrid. All rights reserved.</p>
+            </div>
+
+            <div class="w-full h-px bg-gradient-to-r from-transparent via-white/10 to-transparent mb-6 md:mb-8"></div>
+
+            <!-- REDES SOCIALES -->
+            <div class="flex justify-center gap-6 md:gap-8 mb-8 md:mb-12">
+                <a href="https://facebook.com/josecordeiro2045" target="_blank" rel="noopener noreferrer" class="text-slate-300 hover:text-gold-500 transition-colors duration-300" aria-label="Facebook">
+                    <i class="fab fa-facebook-f text-xl md:text-2xl"></i>
+                </a>
+                <a href="https://twitter.com/cordeiro" target="_blank" rel="noopener noreferrer" class="text-slate-300 hover:text-gold-500 transition-colors duration-300" aria-label="Twitter">
+                    <i class="fab fa-twitter text-xl md:text-2xl"></i>
+                </a>
+                <a href="https://instagram.com/josecordeiro2045" target="_blank" rel="noopener noreferrer" class="text-slate-300 hover:text-gold-500 transition-colors duration-300" aria-label="Instagram">
+                    <i class="fab fa-instagram text-xl md:text-2xl"></i>
+                </a>
+                <a href="https://linkedin.com/in/josecordeiro/" target="_blank" rel="noopener noreferrer" class="text-slate-300 hover:text-gold-500 transition-colors duration-300" aria-label="LinkedIn">
+                    <i class="fab fa-linkedin-in text-xl md:text-2xl"></i>
+                </a>
+                <a href="https://youtube.com/CordeiroJose" target="_blank" rel="noopener noreferrer" class="text-slate-300 hover:text-gold-500 transition-colors duration-300" aria-label="YouTube">
+                    <i class="fab fa-youtube text-xl md:text-2xl"></i>
+                </a>
+            </div>
+
+            <!-- SECCIÓN PREMIUM DE AUTORES -->
+            <div class="mt-8 md:mt-12 pt-8 md:pt-12 border-t border-gold-500/20">
+                <div class="flex flex-col md:flex-row items-center justify-center gap-8 md:gap-12">
+                    <!-- Eduardo Riveros -->
+                    <div class="text-center md:text-right">
+                        <p class="text-slate-300 text-xs md:text-sm uppercase tracking-[0.2em] mb-2 font-semibold">Digital Architecture</p>
+                        <a href="mailto:eduardo@longevitysummit.madrid" class="group inline-flex items-center gap-2 text-white hover:text-gold-500 transition-colors duration-300">
+                            <span class="font-semibold text-sm md:text-base">Eduardo Riveros</span>
+                            <i class="fas fa-arrow-right text-xs opacity-0 group-hover:opacity-100 transition-all duration-300 group-hover:translate-x-1"></i>
+                        </a>
+                        <p class="text-slate-400 text-xs mt-1">Frontend Developer</p>
+                    </div>
+                    
+                    <!-- Divisor -->
+                    <div class="w-px h-12 bg-gradient-to-b from-transparent via-gold-500/50 to-transparent hidden md:block"></div>
+                    
+                    <!-- Pere Fortea -->
+                    <div class="text-center md:text-left">
+                        <p class="text-slate-300 text-xs md:text-sm uppercase tracking-[0.2em] mb-2 font-semibold">Design & Backend</p>
+                        <a href="mailto:pere@longevitysummit.madrid" class="group inline-flex items-center gap-2 text-white hover:text-teal-400 transition-colors duration-300">
+                            <span class="font-semibold text-sm md:text-base">Pere Fortea</span>
+                            <i class="fas fa-arrow-right text-xs opacity-0 group-hover:opacity-100 transition-all duration-300 group-hover:translate-x-1"></i>
+                        </a>
+                        <p class="text-slate-400 text-xs mt-1">Backend Developer</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // INDICADOR DE SCROLL
+        window.addEventListener("scroll", () => {
+            const scrollHeight = document.documentElement.scrollHeight - window.innerHeight;
+            const scrolled = (window.scrollY / scrollHeight) * 100;
+            document.querySelector(".scroll-indicator").style.width = scrolled + "%";
+        });
+
+        // ACTIVA EL MODAL DESPUES DE 5-8 SEGUNDOS
+        window.addEventListener('load', function() {
+            // Verificar si el usuario ya se registró
+            if (!localStorage.getItem('userRegistered')) {
+                // Generar delay aleatorio entre 5 y 8 segundos
+                const randomDelay = Math.floor(Math.random() * 3000) + 5000;
+                setTimeout(function() {
+                    const modal = document.getElementById('register-modal');
+                    modal.classList.remove('hidden');
+                    setTimeout(() => modal.classList.remove('opacity-0'), 10);
+                }, randomDelay);
+            }
+        });
+
+        function closeModal() {
+            const modal = document.getElementById('register-modal');
+            modal.classList.add('opacity-0');
+            setTimeout(() => modal.classList.add('hidden'), 300);
+            // Guardar que el usuario se registró
+            localStorage.setItem('userRegistered', 'true');
+        }
+
+        // FUNCIÓN PARA EL MENÚ MÓVIL
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobile-menu');
+            if (menu.classList.contains('hidden')) {
+                menu.classList.remove('hidden');
+            } else {
+                menu.classList.add('hidden');
+            }
+        }
+
+        function slideGallery(direction) {
+            const container = document.getElementById('gallery-scroll-container');
+            const scrollAmount = window.innerWidth < 768 ? 280 : 350;
+            container.scrollBy({ left: direction * scrollAmount, behavior: 'smooth' });
+        }
+
+        function loadAllSpeakers() {
+            const grid = document.getElementById('speakers-grid');
+            
+            if (grid.children.length <= 4) {
+                // AQUÍ PUEDES EDITAR LOS DATOS DE TUS SPEAKERS (IMÁGENES 5 EN ADELANTE)
+                const speakersData = [
+                    { name: "Aubrey de Grey, PhD", degree: "", role: "Cambridge University" },
+                    { name: "Mehmood Khan, MD", degree: "", role: "Chief Executive Officer, Hevolution Foundation" },
+                    { name: "Michael Ringel, PhD", degree: "", role: "Chief Operating Officer, Life Biosciences" },
+                    { name: "Vijay Vaswani, MPh (c)", degree: "", role: "Co-Founder & CEO, Omniscope" },
+                    { name: "Holger Heyn, MSc", degree: "", role: "Co-Founder & CSO, Omniscope" },
+                    { name: "Liz Parrish, MBA", degree: "", role: "CEO, BioViva" },
+                    { name: "Gil Rodas, MD", degree: "", role: "Head of Sports Medicine Unit, FC Barcelona" },
+                    { name: "Steve Horvath, PhD", degree: "", role: "Principal Investigator, Altos Labs" },
+                    { name: "José Luis Cordeiro, PhD", degree: "", role: "International Member, World Academy of Art and Science" },
+                    { name: "María Blasco, PhD", degree: "", role: "Head, Telomeres and Telomerase Group, CNIO" },
+                    { name: "João Pedro de Magalhães, PhD", degree: "", role: "Chair of Molecular Biogerontology, University of Birmingham" },
+                    { name: "Lars Hartenstein, MD PhD", degree: "", role: "Director of Healthy Longevity, McKinsey Health Institute" },
+                    { name: "David Wood, ScD", degree: "", role: "Executive Director, LEV (Longevity Escape Velocity) Foundation" },
+                    { name: "Tina Woods", degree: "", role: "Founder and CEO, Collider Health" },
+                    { name: "Eduardo Díaz-Rubio, MD", degree: "", role: "President, Royal National Academy of Medicine of Spain" },
+                    { name: "Pedro Guillén, MD", degree: "", role: "Fellow, Royal National Academy of Medicine of Spain" },
+                    { name: "Antonio Garrigues Walker, JD", degree: "", role: "Honorary President, Garrigues Foundation, Spain" },
+                    { name: "Natalie Coles, MSc", degree: "", role: "Director of Supercentenarian Research, LEV Foundation" },
+                    { name: "Kenneth Scott", degree: "", role: "Investor and Founder, Human Longevity & Rejuvenation Syndicate" },
+                    { name: "Daniel Muñoz-Espín, PhD", degree: "", role: "Group Leader in Cancer Early Detection, University of Cambridge" },
+                    { name: "Charlie Kam, BSc", degree: "", role: "Honorary advisor, HumanityPlus" },
+                    { name: "Carmen Simón Mateo, PhD", degree: "", role: "President, Apadrina la Ciencia Foundation" },
+                    { name: "Juan Carlos Méndez, MD", degree: "", role: "President, SOVEMAL" },
+                    { name: "Raquel Yotti, MD", degree: "", role: "PERTE Commissionaire, Ministry of Science, Innovation and Universities" },
+                    { name: "Ángel Niño Quesada", degree: "", role: "Councilor for Innovation, Madrid City Council" },
+                    { name: "Sabinije von Gaffke, MC", degree: "", role: "Director of Partnerships & Programming, Super Human Network" },
+                    { name: "José Serres, MD", degree: "", role: "President, SEMAL (Sociedad Española de Medicina Antienvejecimiento y Longevidad)" },
+                    { name: "Carlos Díaz-Ruza", degree: "", role: "President, MAD e-Health" },
+                    { name: "Sajidxa Mariño, MD", degree: "", role: "Founder & CEO, Respira Libre" },
+                    { name: "Sergio M.L. Tarrero, BSc", degree: "", role: "President, Alianza Futurista" },
+                    { name: "Francisco Mera Cordero, MD", degree: "", role: "Director, Longevity Medicine Unit, Blue Healthcare" },
+                    { name: "Elena Mantilla García", degree: "", role: "General Director, Madrid Excelente" },
+                    { name: "Roberto Grau, PhD", degree: "", role: "CEO, Kyojin S.A. and Co-founder, Juventas4life SL" },
+                    { name: "José Crespo Barrios, PhD", degree: "", role: "CEO, Regeneratics" },
+                    { name: "Pedro Llana", degree: "", role: "Founder and creator of Biow Longevity Systems" },
+                    { name: "Mariana De Chellis", degree: "", role: "Global Ambassador, Coalition for Radical Life Extension" },
+                    { name: "Cody Dean", degree: "", role: "Global Ambassador, Inmortalis/Neovia" },
+                    { name: "Angel Versetti, MSc", degree: "", role: "Longevity Venture Builder / Owner DOGE.ORG" },
+                    { name: "Dylan Livinsgtone, BSc", degree: "", role: "Founder A4LI" } 
+                    ];
+
+                let htmlContent = '';
+                
+                speakersData.forEach((speaker, index) => {
+                    const imageIndex = index + 5; 
+                    const imagePath = `images/${imageIndex}.jpg`; 
+
+                    htmlContent += `
+                    <div class="speaker-card group relative animate-fade-in text-center">
+                        <img src="${imagePath}" 
+                             onerror="this.src='https://via.placeholder.com/150?text=No+Img'"
+                             class="speaker-img w-20 h-20 sm:w-24 sm:h-24 md:w-32 md:h-32 rounded-full mx-auto object-cover mb-3 md:mb-4 bg-navy-800 border-4 border-transparent hover:border-teal-400" alt="${speaker.name}" loading="lazy">
+                        
+                        <h3 class="text-xs sm:text-sm text-white font-bold">${speaker.name}</h3>
+                        <p class="text-[9px] sm:text-[10px] text-slate-400 uppercase tracking-wide mb-1">${speaker.degree}</p>
+                        <p class="text-xs text-teal-400 font-medium">${speaker.role}</p>
+                    </div>
+                    `;
+                });
+
+                grid.insertAdjacentHTML('beforeend', htmlContent);
+            }
+        }
+        
+        // Cargar todos los speakers automáticamente al cargar la página
+        window.addEventListener('load', function() {
+            setTimeout(function() {
+                loadAllSpeakers();
+            }, 100);
+        });
+    </script>
+<script>
+    // Configuración de los rangos de imágenes
+    const groups = [
+        { id: 'gold-container', range: [201, 202, 204, 205, 206], label: 'GOLD', color: 'from-yellow-400 to-yellow-500', textColor: 'text-navy-900', imgClass: 'h-12 md:h-16' },
+        { id: 'silver-container', range: [207, 208,210, 211], label: 'SILVER', color: 'from-gray-400 to-gray-500', textColor: 'text-white', imgClass: 'h-10 md:h-14' },
+        { id: 'institutional-container', range: Array.from({length: 21}, (_, i) => i + 214), label: 'INSTITUTIONAL', color: 'from-blue-500 to-blue-600', textColor: 'text-white', imgClass: 'h-7 md:h-10' }
+    ];
+
+    groups.forEach(group => {
+        const container = document.getElementById(group.id);
+        group.range.forEach(num => {
+            container.innerHTML += `
+                <div class="relative group">
+                    <div class="absolute -inset-1 bg-gradient-to-r ${group.color} rounded-lg opacity-10 group-hover:opacity-60 transition duration-300 blur-sm"></div>
+                    <a href="#" class="relative block bg-white rounded-lg p-1 transition duration-300 hover:scale-105 shadow-sm">
+                        <div class="absolute -top-3 left-1/2 transform -translate-x-1/2 bg-gradient-to-r ${group.color} ${group.textColor} text-[7px] md:text-[9px] font-bold px-2 py-0.5 rounded-full whitespace-nowrap uppercase">${group.label}</div>
+                        <img src="images/${num}.jpg" alt="Sponsor ${num}" class="${group.imgClass} w-auto object-contain grayscale group-hover:grayscale-0 transition duration-300">
+                    </a>
+                </div>
+            `;
+        });
+    });
+</script></body>
+</html>
